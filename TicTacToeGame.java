@@ -15,7 +15,8 @@ public class TicTacToeGame {
 
     }
 
-    public static void printBoard(){
+    public static void showBoard(){
+        System.out.println("****** Current Board ******");
         System.out.println(gameBoard[1]+" | "+gameBoard[2]+" | "+gameBoard[3]);
         System.out.println(gameBoard[4]+" | "+gameBoard[5]+" | "+gameBoard[6]);
         System.out.println(gameBoard[7]+" | "+gameBoard[8]+" | "+gameBoard[9]);
@@ -24,6 +25,6 @@ public class TicTacToeGame {
     public static void main(String[] args) {
         TicTacToeGame();
         choice();
-        printBoard();
+        showBoard();
     }
 }
