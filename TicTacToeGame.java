@@ -1,10 +1,18 @@
+import java.util.Scanner;
 public class TicTacToeGame {
     public static char[] gameBoard = new char[10];
+    static Scanner sc = new Scanner(System.in);
 
     public static void TicTacToeGame(){
         for (int i=0; i< gameBoard.length; i++){
             gameBoard[i] = ' ';
         }
+    }
+
+    public static char choice(){
+        System.out.println("Do you want X or O : ");
+        return sc.next().charAt(0);
+
     }
 
     public static void printBoard(){
@@ -15,6 +23,7 @@ public class TicTacToeGame {
 
     public static void main(String[] args) {
         TicTacToeGame();
+        choice();
         printBoard();
     }
 }
