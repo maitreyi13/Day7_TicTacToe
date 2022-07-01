@@ -3,6 +3,7 @@ public class TicTacToeGame {
     public static char[] gameBoard = new char[10];
     public static boolean is_player = true;
     public static int playerPos;
+    public static char letter;
     static Scanner sc = new Scanner(System.in);
 
     public static void TicTacToeGame(){
@@ -13,7 +14,7 @@ public class TicTacToeGame {
 
     public static void choice(){
         System.out.println("Do you want X or O : ");
-        sc.next().charAt(0);
+        letter = sc.next().charAt(0);
 
     }
 
@@ -35,6 +36,7 @@ public class TicTacToeGame {
                } else {
                   System.out.println("Valid Position");
                }
+               gameBoard[playerPos] = letter;
         }
     }
 
@@ -43,5 +45,6 @@ public class TicTacToeGame {
         choice();
         showBoard();
         moveLocation();
+        showBoard();
     }
 }
