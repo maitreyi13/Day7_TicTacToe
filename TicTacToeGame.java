@@ -1,12 +1,14 @@
 import java.util.Scanner;
+import java.util.Random;
 public class TicTacToeGame {
     public static char[] gameBoard = new char[10];
     public static boolean is_player = true;
-    public static int playerPos;
-    public static char letter;
+    public static int playerPos, compPos;
+    public static char playerXO;
+    public static char computerXO;
     static Scanner sc = new Scanner(System.in);
 
-    public static void TicTacToeGame(){
+    public static void GameBoard(){
         for (int i=0; i< gameBoard.length; i++){
             gameBoard[i] = ' ';
         }
@@ -14,8 +16,14 @@ public class TicTacToeGame {
 
     public static void choice(){
         System.out.println("Do you want X or O : ");
-        letter = sc.next().charAt(0);
+        playerXO = sc.next().charAt(0);
 
+        if (playerXO == 'X') {
+            computerXO = 'O';
+        } else {
+            computerXO = 'X';
+        }
+        System.out.println("Computer's Letter: "+computerXO);
     }
 
     public static void showBoard(){
@@ -36,15 +44,40 @@ public class TicTacToeGame {
                } else {
                   System.out.println("Valid Position");
                }
-               gameBoard[playerPos] = letter;
+               gameBoard[playerPos] = playerXO;
+        }
+    }
+
+    public static void setCompPos(){
+        compPos = (int) (Math.random() * 9) + 1;
+        if (gameBoard[compPos] == ' '){
+            gameBoard[compPos] = computerXO;
+        } else {
+           setCompPos();
+        }
+    }
+    public static void turn(){
+        int rand = (int) Math.floor(Math.random() * 10) % 2;
+        switch (rand){
+            case 1:
+                System.out.println("--- Player's turn ---");
+                moveLocation();
+                showBoard();
+            break;
+            case 0:
+                System.out.println("--- Computer's turn ---");
+                setCompPos();
+                showBoard();
+            break;
+            default:
+                System.out.println("Try Again!");
         }
     }
 
     public static void main(String[] args) {
-        TicTacToeGame();
+        GameBoard();
+        showBoard();
         choice();
-        showBoard();
-        moveLocation();
-        showBoard();
+        turn();
     }
 }
