@@ -59,25 +59,22 @@ public class TicTacToeGame {
         int rand = (int) Math.floor(Math.random() * 10) % 2;
         switch (rand) {
             case 1 -> {
-//                do {
+                do {
                 System.out.println("--- Player's turn ---");
                 moveLocation();
                 showBoard();
-//                    System.out.println("--- Computer's turn ---");
-//                    setCompPos();
-//                    showBoard();
-//                } while (flag);
+                    System.out.println("--- Computer's turn ---");
+                    setCompPos();
+                    showBoard();
+                } while (flag);
 
             }
             case 0 -> {
-//                do {
+                do {
                 System.out.println("--- Computer's turn ---");
                 setCompPos();
                 showBoard();
-//                    System.out.println("--- Player's turn ---");
-//                    moveLocation();
-//                    showBoard();
-//                } while (flag);
+                } while (flag);
             }
             default -> System.out.println("Try Again!");
         }
