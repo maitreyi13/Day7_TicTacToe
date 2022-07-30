@@ -1,21 +1,19 @@
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Random;
 public class TicTacToeGame {
     public static char[] gameBoard = new char[10];
     public static boolean is_player = true;
     public static int playerPos, compPos;
-    public static char playerXO;
-    public static char computerXO;
+    public static char playerXO, computerXO;
     static Scanner sc = new Scanner(System.in);
+    static boolean flag = true;
 
     public static void GameBoard(){
-        for (int i=0; i< gameBoard.length; i++){
-            gameBoard[i] = ' ';
-        }
+        Arrays.fill(gameBoard, ' ');
     }
 
     public static void choice(){
-        System.out.println("Do you want X or O : ");
+        System.out.print("Do you want X or O : ");
         playerXO = sc.next().charAt(0);
 
         if (playerXO == 'X') {
@@ -34,17 +32,18 @@ public class TicTacToeGame {
     }
 
     public static void moveLocation(){
-        if (is_player == true ){
-             System.out.println("Please enter the the position you want to play(1-9): ");
-             playerPos = sc.nextInt();
-               if (playerPos < 1 || playerPos > 9){
-                  System.out.println("This position is off the board. Play again!");
-               } else if (gameBoard[playerPos] != ' ') {
-                  System.out.println("Position is occupied. Try again!");
-               } else {
-                  System.out.println("Valid Position");
-               }
-               gameBoard[playerPos] = playerXO;
+        if (is_player){
+            System.out.println("Please enter the the position you want to play(1-9): ");
+            playerPos = sc.nextInt();
+            if (playerPos < 1 || playerPos > 9){
+                System.out.println("This position is off the board. Play again!");
+                moveLocation();
+            } else if (gameBoard[playerPos] != ' ') {
+                System.out.println("Position is occupied. Try again!");
+            } else {
+                System.out.println("Valid Position");
+            }
+            gameBoard[playerPos] = playerXO;
         }
     }
 
@@ -53,31 +52,63 @@ public class TicTacToeGame {
         if (gameBoard[compPos] == ' '){
             gameBoard[compPos] = computerXO;
         } else {
-           setCompPos();
+            setCompPos();
         }
     }
     public static void turn(){
         int rand = (int) Math.floor(Math.random() * 10) % 2;
-        switch (rand){
-            case 1:
+        switch (rand) {
+            case 1 -> {
+//                do {
                 System.out.println("--- Player's turn ---");
                 moveLocation();
                 showBoard();
-            break;
-            case 0:
+//                    System.out.println("--- Computer's turn ---");
+//                    setCompPos();
+//                    showBoard();
+//                } while (flag);
+
+            }
+            case 0 -> {
+//                do {
                 System.out.println("--- Computer's turn ---");
                 setCompPos();
                 showBoard();
-            break;
-            default:
-                System.out.println("Try Again!");
+//                    System.out.println("--- Player's turn ---");
+//                    moveLocation();
+//                    showBoard();
+//                } while (flag);
+            }
+            default -> System.out.println("Try Again!");
         }
     }
 
+    public static void winner(){
+        for (char c : gameBoard) {
+            if (c == 'O' || c == 'X') {
+                flag = true;
+                return;
+            }
+        }
+        if (gameBoard[1] == (gameBoard[2] = gameBoard[3])){
+            System.out.println("We have a winner");
+            flag = false;
+        } else if (gameBoard[1] == (gameBoard[4] = gameBoard[7])) {
+            System.out.println("We have a winner");
+            flag = false;
+        } else if (gameBoard[1] == (gameBoard[5] = gameBoard[9])) {
+            System.out.println("We have a winner");
+            flag = false;
+        }
+        else
+            System.out.println("Turn Changed");
+    }
     public static void main(String[] args) {
+        choice();
         GameBoard();
         showBoard();
-        choice();
         turn();
+        winner();
+
     }
 }
